@@ -14,6 +14,13 @@ How to use:
 
 Exports:
 * Frame code: generates for each layer a, the line of code defining it's frame. a.frame = CGRectMake(...);
-* Init_Frame code: generates for each layer a, the line of code initing the component with the frame. a = UIView(frame: CGRectMake(...))
+* Init+Frame code: generates for each layer a, the line of code initing the component with the frame. a = UIView(frame: CGRectMake(...))
 
-More to come...
+
+Installing Plugins (http://developer.sketchapp.com/introduction/)
+
+If you double-click a .sketchplugin file, Sketch will copy it into the Plugins folder for you. Any commands that it implements should immediately show up in the Plugins menu.
+
+Alternatively, you can install plugins by simply moving them into the Plugins folder yourself.
+
+Note: Sketch also supports using aliases and links to individual Plugins, or to the Plugins folder itself. This allows you to place them elsewhere (for example, a Dropbox folder to keep multiple installs of Sketch synced).
