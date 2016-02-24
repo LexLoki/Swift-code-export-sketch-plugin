@@ -1,0 +1,31 @@
+{
+  "author" : "",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "handler" : "onRun",
+      "shortcut" : "cmd ctrl e",
+      "name" : "Frame code",
+      "identifier" : "swift_code_export"
+    },
+      {
+      "script" : "script.cocoascript",
+      "handler" : "onRunInit",
+      "shortcut" : "cmd ctrl r",
+      "name" : "Init+Frame code",
+      "identifier" : "swift_code_export_init"
+    }
+  ],
+  "menu" : {
+    "items" : [
+      "swift_code_export",
+        "swift_code_export_init"
+    ],
+    "title" : "Swift_Code_Export"
+  },
+  "identifier" : "com.example.sketch.396868f0-0ef3-4232-8a90-bdcdc04d09e1",
+  "version" : "1.0",
+  "description" : "",
+  "authorEmail" : "",
+  "name" : "Swift_Code_Export"
+}

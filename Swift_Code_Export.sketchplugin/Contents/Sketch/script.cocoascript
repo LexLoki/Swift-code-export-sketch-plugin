@@ -1,0 +1,51 @@
+function is_group(layer) {
+  return [layer isMemberOfClass:[MSLayerGroup class]] || [layer isMemberOfClass:[MSArtboardGroup class]]
+}
+
+function round(n){
+	return Math.round(n*1000)/1000;
+}
+var onRun = function(context) {
+	swift_export(context.selection,context,false);
+}
+var onRunInit = function(context) {
+    swift_export(context.selection,context,true);
+}
+function swift_export(selectedLayers,context,withInit){
+	var selectedCount = selectedLayers.count();
+    var func = withInit ? initPrint : framePrint;
+    var didWork = false;
+	for (var i=0; i<selectedCount; i++){
+		var layer = selectedLayers[i];
+		if(is_group(layer)){
+            didWork = true;
+			log('is group');
+			var name = layer.name();
+			var children = layer.layers().array();
+			var q = children.count();
+			var superFrame = layer.frame();
+			var w = superFrame.width();
+			var h = superFrame.height();
+			var cText = '';
+			for(var j=0; j<q; j++){
+				var lay = children[j];
+				var frame = lay.frame();
+				var x = round(frame.x()/w);
+				var y = round(frame.y()/h);
+				var wi = round(frame.width()/w);
+				var he = round(frame.height()/h);
+                cText = cText + func(lay.name(),x,y,wi,he)+'\n';
+			}
+			NSApplication.sharedApplication().displayDialog_withTitle(cText,'Frame output (press Enter to dismiss)');
+		}
+	}
+    if (didWork == false){
+        NSApplication.sharedApplication().displayDialog_withTitle('Select one or more artBoard layers to export the code for their subviews','Error: No Artboard layer selected');
+    }
+}
+function initPrint(name,x,y,w,h){
+	return (name+'=UIView(frame: CGRectMake('+x+'*w,'+y+'*h,'+w+'*w,'+h+'*h))');
+}
+function framePrint(name,x,y,w,h){
+	return ('fr',name+'.frame = CGRectMake('+x+'*w,'+y+'*h,'+w+'*w,'+h+'*h)');
+}
