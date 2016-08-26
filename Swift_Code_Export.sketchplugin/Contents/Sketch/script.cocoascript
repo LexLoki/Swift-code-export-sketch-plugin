@@ -11,6 +11,32 @@ var onRun = function(context) {
 var onRunInit = function(context) {
     swift_export(context.selection,context,true);
 }
+function getCode(layer, func){
+	var name = layer.name();
+	var children = layer.layers().array();
+	var q = children.count();
+	var superFrame = layer.frame();
+	var w = superFrame.width();
+	var h = superFrame.height();
+	var cText = '';
+	var sizes = []
+	for(var j=0; j<q; j++){
+		var lay = children[j];
+		var frame = lay.frame();
+		var x = round(frame.x()/w);
+		var y = round(frame.y()/h);
+		var wi = round(frame.width()/w);
+		var he = round(frame.height()/h);
+        cText = cText + func(lay.name(),x,y,wi,he)+'\n';
+        sizes[j] = {width: wi, height: he};
+	}
+	for(var j=0; j<q; j++){
+		if(is_group(children[j])){
+			cText = cText + 'w='+sizes[j].width + '; h='+sizes[j].height+'\n'+getCode(children[j],func);
+		}
+	}
+	return cText;
+}
 function swift_export(selectedLayers,context,withInit){
 	var selectedCount = selectedLayers.count();
     var func = withInit ? initPrint : framePrint;
@@ -19,9 +45,8 @@ function swift_export(selectedLayers,context,withInit){
 		var layer = selectedLayers[i];
 		if(is_group(layer)){
             didWork = true;
-			log('is group');
 			var name = layer.name();
-			var children = layer.layers().array();
+			var children = layer.layers();
 			var q = children.count();
 			var superFrame = layer.frame();
 			var w = superFrame.width();
@@ -35,6 +60,11 @@ function swift_export(selectedLayers,context,withInit){
 				var wi = round(frame.width()/w);
 				var he = round(frame.height()/h);
                 cText = cText + func(lay.name(),x,y,wi,he)+'\n';
+			}
+			for(var j=0; j<q; j++){
+				if(is_group(children[j])){
+
+				}
 			}
 			NSApplication.sharedApplication().displayDialog_withTitle(cText,'Frame output (press Enter to dismiss)');
 		}
