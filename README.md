@@ -5,7 +5,7 @@ Let's say you have somekind of view like UIView or UITableViewCell and you want 
 Using sketch is easy to prepare the interface, but when it comes to turn the visual into accurate numbers, things might get way tricky, especially for universal devices.
 With this plugin you can select an Artboard Layer you used to represent the view, put all the contents there and then generate the code to create it programmatically. No storyboard, no bugs, no worries (or less at least).
 
-##How to use:
+## How to use:
 
 1. Select an Artboard Layer
 2. Go to Plugins>Swift_Code_Export> and select the desired export.
@@ -13,12 +13,12 @@ With this plugin you can select an Artboard Layer you used to represent the view
 4. Above the code, create variables 'w' and 'h' and assign to them, respectively, the width and the height of the view where you are placing the elements. They are used to calculate the right proportion and place the elements accordingly.
 5. Switch the UIView ocurrances to whatever components you are using.
 
-##Exports:
+## Exports:
 * Frame code: generates for each layer a, the line of code defining it's frame. `a.frame = CGRectMake(...)`
 * Init+Frame code: generates for each layer a, the line of code initing the component with the frame. `a = UIView(frame: CGRectMake(...))`
 * More to come...
 
-##Example:
+## Example:
 ![alt tag](https://cloud.githubusercontent.com/assets/9408934/13299507/3d373344-db1a-11e5-8c32-2242c2186a6b.png)
 ![alt tag](https://cloud.githubusercontent.com/assets/9408934/13299513/416260f6-db1a-11e5-96ba-9b75ae01acee.png)
 ```
@@ -34,7 +34,7 @@ With this plugin you can select an Artboard Layer you used to represent the view
       myLabel = UILabel(frame: CGRectMake(0.442*w, 0.344*h, 0.49*w, 0.344*h))
   }
 ```
-##Installing Plugins (http://developer.sketchapp.com/introduction/)
+## Installing Plugins (http://developer.sketchapp.com/introduction/)
 
 If you double-click a .sketchplugin file, Sketch will copy it into the Plugins folder for you. Any commands that it implements should immediately show up in the Plugins menu.
 
